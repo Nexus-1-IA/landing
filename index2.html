@@ -1444,18 +1444,23 @@
         
         // Selección de método de pago
         const paymentMethods = document.querySelectorAll('.payment-method-select');
-        
-        paymentMethods.forEach(method => {
-            method.addEventListener('click', () => {
-                const paymentType = method.getAttribute('data-method');
-                
-                if (paymentType === 'mercadopago' || paymentType === 'card') {
-                    alert(`Redirigiendo al checkout de ${paymentType === 'mercadopago' ? 'Mercado Pago' : 'Tarjetas'}...`);
-                } else if (paymentType === 'transfer') {
-                    transferModal.classList.add('active');
-                }
-            });
-        });
+
+paymentMethods.forEach(method => {
+    method.addEventListener('click', () => {
+        const paymentType = method.getAttribute('data-method');
+
+        if (paymentType === 'mercadopago') {
+            // Redirige directamente a la página de Mercado Pago
+            window.location.href = 'https://www.mercadopago.com.ar/money-out/transfer/new-account';
+        } else if (paymentType === 'card') {
+            // Puedes redirigir a otra página de tu app o una URL de pasarela de tarjetas
+            window.location.href = '/checkout-tarjeta'; // cambia esto por la URL correspondiente
+        } else if (paymentType === 'transfer') {
+            transferModal.classList.add('active');
+        }
+    });
+});
+
         
         // Copiar detalles de transferencia
         const copyDetailsBtn = document.getElementById('copy-details');
